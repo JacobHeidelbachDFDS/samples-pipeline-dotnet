@@ -4,6 +4,7 @@ metadata:
   labels:
     app: pipeline-sample-dotnet
   name: pipeline-sample-dotnet
+  namespace: $(kubernetes-namespace)
   annotations:
     scrape-metrics: 'true'
 spec:
