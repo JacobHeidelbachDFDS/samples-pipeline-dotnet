@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: pipeline-sample-dotnet
+  namespace: $(kubernetes-namespace)
 spec:
   replicas: 2
   selector:
