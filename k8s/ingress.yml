@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: pipeline-sample-dotnet
+  namespace: $(kubernetes-namespace)
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
@@ -10,7 +11,7 @@ spec:
   - http:
       # host: app.ded.dfds.com
       paths:
-      - path: /pipeline-sample-dotnet
+      - path: /$(environment)-pipeline-sample-dotnet
         backend:
           serviceName: pipeline-sample-dotnet
           servicePort: external
