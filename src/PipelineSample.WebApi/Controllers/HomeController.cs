@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace PipelineSample.WebApi.Controllers
 {
@@ -9,7 +10,8 @@ namespace PipelineSample.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Hello from Api");
+            var connString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
+            return Ok($"Hello from Api - using var {connString}");
         }
     }
 }
