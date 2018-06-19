@@ -9,7 +9,7 @@ namespace PipelineSample.WebApi.Controllers
         // GET api/values
         [HttpGet]
         public IActionResult Get()
-        {
+        { 
             var connString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
             return Ok($"Hello from Api - using var {connString}");
         }
