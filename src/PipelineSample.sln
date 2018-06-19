@@ -4,6 +4,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelineSample.WebApi", "PipelineSample.WebApi\PipelineSample.WebApi.csproj", "{066BFC15-781E-4136-B4F8-ABD403F5AAD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelineSample.WebApi.Tests", "PipelineSample.WebApi.Tests\PipelineSample.WebApi.Tests.csproj", "{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,18 @@ Global
 		{066BFC15-781E-4136-B4F8-ABD403F5AAD9}.Release|x64.Build.0 = Release|Any CPU
 		{066BFC15-781E-4136-B4F8-ABD403F5AAD9}.Release|x86.ActiveCfg = Release|Any CPU
 		{066BFC15-781E-4136-B4F8-ABD403F5AAD9}.Release|x86.Build.0 = Release|Any CPU
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Debug|x64.ActiveCfg = Debug|x64
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Debug|x64.Build.0 = Debug|x64
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Debug|x86.ActiveCfg = Debug|x86
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Debug|x86.Build.0 = Debug|x86
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Release|x64.ActiveCfg = Release|x64
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Release|x64.Build.0 = Release|x64
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Release|x86.ActiveCfg = Release|x86
+		{3746BFF8-4C2A-4A08-9BF2-7CEC98DE219E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
