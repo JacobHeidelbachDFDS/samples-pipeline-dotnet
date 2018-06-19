@@ -19,6 +19,12 @@ spec:
         ports:
         - containerPort: 80
           name: web
+        env:
+          - name:  CONNECTIONSTRING
+            valueFrom:
+              secretKeyRef:
+                name:  connection
+                key:  connectionstring
         # resources:
         #   requests:
         #     cpu: "20m"
