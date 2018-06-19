@@ -21,7 +21,7 @@ namespace PipelineSample.WebApi.Tests
         public void TestThatGetReturnsHelloWorld()
         {
             // Act
-            Environment.SetEnvironmentVariable("CONNECTIONSTRING","futte");
+            Environment.SetEnvironmentVariable("CONNECTIONSTRING","futte2");
             var result = (OkObjectResult)_sut.Get();
 
             Assert.Equal("Hello from Api - using var futte",(string)result.Value);
