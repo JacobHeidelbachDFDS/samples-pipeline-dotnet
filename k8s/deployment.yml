@@ -25,6 +25,8 @@ spec:
               secretKeyRef:
                 name:  connection
                 key:  connectionstring
+          - name: BUILDVERSION
+            value: $(Build.BuildId)
         # resources:
         #   requests:
         #     cpu: "20m"

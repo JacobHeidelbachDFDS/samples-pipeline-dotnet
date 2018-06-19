@@ -13,5 +13,14 @@ namespace PipelineSample.WebApi.Controllers
             var connString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
             return Ok($"Hello from Api - using var {connString}");
         }
+
+
+        [HttpGet]
+        [Route("/version")]
+        public IActionResult GetVersion()
+        { 
+            var version = Environment.GetEnvironmentVariable("BUILDVERSION");
+            return Ok(version ?? "0.0.0");
+        }  
     }
 }
