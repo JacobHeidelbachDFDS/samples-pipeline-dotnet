@@ -20,7 +20,17 @@ namespace PipelineSample.WebApi.Controllers
         public IActionResult GetVersion()
         { 
             var version = Environment.GetEnvironmentVariable("BUILDVERSION");
-            return Ok(version ?? "0.0.0");
+            return Ok(new Version(version ?? "0.0.0"));
         }  
+    }
+
+    class Version
+    {   
+        public string VersionNumber { get; private set; }
+        public Version(string version)
+        {
+            VersionNumber = version;
+        }
+
     }
 }
