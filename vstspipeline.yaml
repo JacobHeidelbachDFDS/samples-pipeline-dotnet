@@ -1,0 +1,58 @@
+queue:
+  name: API Enablement
+  condition: succeeded()
+steps:
+- task: DotNetCoreCLI@2
+  displayName: dotnet restore
+  inputs:
+    command: restore
+    projects: 'src/PipelineSample.sln'
+    verbosityRestore: Quiet
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet build
+  inputs:
+    projects: 'src/PipelineSample.sln'
+    arguments: '-c Release'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: test
+    projects: 'src/PipelineSample.WebApi.Tests/PipelineSample.WebApi.Tests.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: 'src/PipelineSample.WebApi/PipelineSample.WebApi.csproj'
+    arguments: '-c Release -o $(Build.SourcesDirectory)/output'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: Docker@0
+  displayName: Build an image
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerFile: Dockerfile
+    imageName: 'pipelinesample:$(Build.BuildId)'
+    qualifyImageName: false
+
+- task: AmazonWebServices.aws-vsts-tools.ECRPushImage.ECRPushImage@1
+  displayName: Push Image: 
+  inputs:
+    awsCredentials: 'Shared ECR Non-Prod'
+    regionName: 'eu-central-1'
+    sourceImageName: pipelinesample
+    sourceImageTag: '$(Build.BuildId)'
+    repositoryName: 'dfds/pipelinesample'
+    pushTag: '$(Build.BuildId)'
+    autoCreateRepository: true
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifact: manifests
+  inputs:
+    PathtoPublish: k8s
+    ArtifactName: manifests
+
