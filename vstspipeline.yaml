@@ -1,6 +1,5 @@
 queue:
   name: API Enablement
-  condition: succeeded()
 steps:
 - task: DotNetCoreCLI@2
   displayName: dotnet restore
