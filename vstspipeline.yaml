@@ -40,7 +40,7 @@ steps:
     qualifyImageName: false
 
 - task: AmazonWebServices.aws-vsts-tools.ECRPushImage.ECRPushImage@1
-  displayName: Push Image: 
+  displayName: 'Push Image:'
   inputs:
     awsCredentials: 'Shared ECR Non-Prod'
     regionName: 'eu-central-1'
@@ -51,7 +51,7 @@ steps:
     autoCreateRepository: true
 
 - task: PublishBuildArtifacts@1
-  displayName: Publish Artifact: manifests
+  displayName: 'Publish Artifact: manifests'
   inputs:
     PathtoPublish: k8s
     ArtifactName: manifests
