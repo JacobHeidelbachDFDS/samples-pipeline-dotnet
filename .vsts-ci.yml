@@ -1,5 +1,6 @@
 queue:
   name: API Enablement
+name: $(BuildDefinitionName)_$(Date:yyyyMMdd)$(Rev:.rr)
 steps:
 - task: DotNetCoreCLI@2
   displayName: dotnet restore
