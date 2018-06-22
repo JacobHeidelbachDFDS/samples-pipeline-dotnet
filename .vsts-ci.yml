@@ -11,6 +11,11 @@ steps:
     verbosityRestore: Quiet
 
 - task: DotNetCoreCLI@2
+  displayName: dotnet version
+  inputs:
+    arguments: '--version'
+
+- task: DotNetCoreCLI@2
   displayName: dotnet build
   inputs:
     projects: 'src/PipelineSample.sln'
