@@ -11,7 +11,7 @@ namespace PipelineSample.WebApi.Controllers
         public IActionResult Get()
         { 
             var connString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
-            return Ok($"Hellooo from Api - using var {connString}");
+            return Ok($"Helloooo from Api - using var {connString}");
         }
 
 
