@@ -1,5 +1,6 @@
 queue:
   name: API Enablement
+  demands: OS -equals Linux
 name: $(BuildDefinitionName)_$(Date:yyyyMMdd)$(Rev:.rr)
 steps:
 - task: DotNetCoreCLI@2
