@@ -14,7 +14,7 @@ steps:
   displayName: Simple powershell
   inputs:
     targetType: inline
-    script: '"Write-Host "Hello from PowerShell"'
+    script: 'Write-Host "Hello from PowerShell"'
 
 - task: DotNetCoreCLI@2
   displayName: dotnet build
