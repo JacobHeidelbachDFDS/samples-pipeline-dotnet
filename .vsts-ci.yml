@@ -10,11 +10,11 @@ steps:
     projects: 'src/PipelineSample.sln'
     verbosityRestore: Quiet
 
-- task: DotNetCoreCLI@2
-  displayName: dotnet version
+- task: PowerShell@2
+  displayName: Simple powershell
   inputs:
-    command: ''
-    arguments: '--version'
+    targetType: inline
+    script: '"Write-Host "Hello from PowerShell"'
 
 - task: DotNetCoreCLI@2
   displayName: dotnet build
