@@ -3,7 +3,9 @@ pipeline:
     image: microsoft/aspnetcore-build:2.0
     commands:
       - dotnet restore src/PipelineSample.sln
-      - dotnet -c Release src/PipelineSample.sln
+      - dotnet build -c Release src/PipelineSample.sln
+      - dotnet test 'src/PipelineSample.WebApi.Tests/PipelineSample.WebApi.Tests.csproj'
+      - dotnet publish '-c Release' 'src/PipelineSample.WebApi/PipelineSample.WebApi.csproj'
 
   notify:
     image: plugins/slack
