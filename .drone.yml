@@ -2,7 +2,7 @@ pipeline:
   backend:
     image: microsoft/aspnetcore-build:2.0
     commands:
-      - dotnet restore
+      - dotnet restore src/PipelineSample.sln
       - dotnet -c Release src/PipelineSample.sln
 
   notify:
