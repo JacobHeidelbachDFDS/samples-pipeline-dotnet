@@ -7,7 +7,7 @@ pipeline:
       - dotnet test 'src/PipelineSample.WebApi.Tests/PipelineSample.WebApi.Tests.csproj'
       - dotnet publish -c Release 'src/PipelineSample.WebApi/PipelineSample.WebApi.csproj'
 
-  notify:
-    image: plugins/slack
-    channel: developers
-    username: drone
+  #notify:
+  #  image: plugins/slack
+  #  channel: developers
+  #  username: drone

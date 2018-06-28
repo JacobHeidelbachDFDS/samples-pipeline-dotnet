@@ -2,6 +2,8 @@ queue:
   name: API Enablement
   demands: OS -equals Linux
 name: $(Build.BuildId)
+trigger:
+- master
 steps:
 - task: DotNetCoreCLI@2
   displayName: dotnet restore
@@ -9,24 +11,21 @@ steps:
     command: restore
     projects: 'src/PipelineSample.sln'
     verbosityRestore: Quiet
-
-- task: PowerShell@2
-  displayName: Simple powershell
-  inputs:
-    targetType: inline
-    script: 'Write-Host "Hello from PowerShell"'
+  enabled: false
 
 - task: DotNetCoreCLI@2
   displayName: dotnet build
   inputs:
     projects: 'src/PipelineSample.sln'
     arguments: '-c Release'
+  enabled: false
 
 - task: DotNetCoreCLI@2
   displayName: dotnet test
   inputs:
     command: test
     projects: 'src/PipelineSample.WebApi.Tests/PipelineSample.WebApi.Tests.csproj'
+  enabled: false
 
 - task: DotNetCoreCLI@2
   displayName: dotnet publish
@@ -37,6 +36,7 @@ steps:
     arguments: '-c Release -o $(Build.SourcesDirectory)/output'
     zipAfterPublish: false
     modifyOutputPath: false
+  enabled: false
 
 - task: Docker@0
   displayName: Build an image
@@ -45,6 +45,7 @@ steps:
     dockerFile: Dockerfile
     imageName: 'pipelinesample:$(Build.BuildId)'
     qualifyImageName: false
+  enabled: false
 
 - task: AmazonWebServices.aws-vsts-tools.ECRPushImage.ECRPushImage@1
   displayName: 'Push Image:'
@@ -56,10 +57,38 @@ steps:
     repositoryName: 'dfds/pipelinesample'
     pushTag: '$(Build.BuildId)'
     autoCreateRepository: true
+  enabled: false
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: manifests'
   inputs:
     PathtoPublish: k8s
     ArtifactName: manifests
+  enabled: false
 
+- bash: |
+   export AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)
+   chmod +x ./pipeline.sh
+   ./pipeline.sh $(Build.BuildId)
+  displayName: Pipeline Bash Script
+  enabled: true
+
+- powershell: |
+   $env:AWS_SECRET_ACCESS_KEY = "$(AWS_SECRET_ACCESS_KEY)"
+   ./pipeline.ps1 -pushImage -buildNumber $(Build.BuildId)
+  displayName: Pipeline PowerShell Script
+  enabled: false
+
+- task: PublishTestResults@2
+  displayName: Publish Test Results
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: testresult.trx
+    searchFolder: '$(System.DefaultWorkingDirectory)/src'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: "Publish Artifact: manifests"
+  inputs:
+    PathtoPublish: k8s
+    ArtifactName: manifests
