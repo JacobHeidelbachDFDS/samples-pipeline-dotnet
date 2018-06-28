@@ -5,7 +5,7 @@ pipeline:
       - dotnet restore src/PipelineSample.sln
       - dotnet build -c Release src/PipelineSample.sln
       - dotnet test 'src/PipelineSample.WebApi.Tests/PipelineSample.WebApi.Tests.csproj'
-      - dotnet publish '-c Release' 'src/PipelineSample.WebApi/PipelineSample.WebApi.csproj'
+      - dotnet publish -c Release 'src/PipelineSample.WebApi/PipelineSample.WebApi.csproj'
 
   notify:
     image: plugins/slack
