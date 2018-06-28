@@ -1,0 +1,11 @@
+pipeline:
+  backend:
+    image: microsoft/aspnetcore-build:2.0
+    commands:
+      - dotnet restore
+      - dotnet -c Release src/PipelineSample.sln
+
+  notify:
+    image: plugins/slack
+    channel: developers
+    username: drone
